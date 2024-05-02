@@ -10,7 +10,7 @@ typedef struct {
 
 void error(char* message) {
 	fprintf(stderr, "%s\n", message);
-	return -1;
+	return;
 }
 
 void init_queue(QueueType *q) {
@@ -41,7 +41,9 @@ element dequeue(QueueType* q) {
 	}
 	else {
 		q->front = (q->front + 1) % MAX_QUEUE_SIZE;
+		printf("큐에서 삭제된 원소: %d\n\n", q->data[q->front]);
 		return q->data[q->front];
+		
 	}
 }
 
@@ -67,7 +69,7 @@ void queue_print(QueueType* q) {
 		}
 		printf("%2d\n", q->data[i]);
 	}
-	printf("-----------------------------\n");
+	printf("-----------------------------\n\n");
 }
 
 int main(void) {
@@ -93,8 +95,7 @@ int main(void) {
 			printf("\n");
 			break;
 		case 2:
-			e = dequeue(&queue);
-			printf("큐에서 삭제된 원소: %d\n\n", e);
+			dequeue(&queue);
 			break;
 		case 3:
 			queue_print(&queue);
@@ -102,7 +103,7 @@ int main(void) {
 		case 4:
 			exit(0);
 		default:
-			printf("잘못된 선택입니다.\n");
+			printf("잘못된 선택입니다.\n\n");
 		}
 	}
 
